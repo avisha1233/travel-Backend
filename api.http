@@ -1,0 +1,164 @@
+@baseUrl = http://localhost:5000
+@token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YjE3YzIyOGUyNGNlZGM0NjcwYTk0MiIsImlhdCI6MTc1Njg5MzA4MSwiZXhwIjoxNzU4MTg5MDgxfQ.6sJnFubmLdt7a1SONLzOmX-knD0HICEGNDKV4-BO5XQ
+
+
+### Create a package list
+POST {{baseUrl}}/package-lists
+Content-Type: application/json
+
+{
+  "name": "Trousers"
+}
+
+
+### Get all package lists
+GET {{baseUrl}}/package-lists
+
+
+### Get a package list by id
+GET {{baseUrl}}/package-lists/687e106cc7d7b72a4b0e7e0b
+
+
+### Create a package list
+POST {{baseUrl}}/package-lists
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "white T-Shirt"
+}
+
+
+
+### Get all package lists
+GET {{baseUrl}}/package-lists/
+
+
+### Get a package list by id
+GET {{baseUrl}}/package-lists/
+
+### Update a package list
+PATCH {{baseUrl}}/package-lists/687e106cc7d7b72a4b0e7e0a
+Content-Type: application/json
+
+{
+  "completed": true
+}
+
+### Delete a package list
+DELETE {{baseUrl}}/package-lists/687e107cc7d7b72a4b0e7e0d
+Authorization : Bearer {{token}}
+
+### Get a package list by id 
+GET {{baseUrl}}/package-lists/687e106cc7d7b72a4b0e7e0b
+Authorization: Bearer {{token}}
+
+### Create a user
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "johnDoe",
+  "email": "john.doe2@gmail.com",
+  "password": "password"
+}
+
+### register a user
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john.doe3@gmail.com",
+  "password": "password"
+}
+
+### Login a user
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "email": "john.doe3@gmail.com",
+  "password": "password"
+}
+
+### create a trip
+POST {{baseUrl}}/trips
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title":"Varanasi,Ayodhya,Mathura,Vrindavan",
+  "startDate":"2025-08-01",
+  "endDate":"2025-08-10",
+  "destination":["Varanasi","Ayodhya","Mathura","Vrindavan","Gokul","Barsana"],
+  "budget":{
+    "total": 50000,
+    "spent": 0
+  }
+}
+
+### Get all trips
+GET {{baseUrl}}/trips
+Authorization: Bearer {{token}}
+
+### Get a trip by id
+GET {{baseUrl}}/trips/6895c8cda1b22caa95fed154
+Authorization: Bearer {{token}}
+
+### Add an expense to a trip
+POST {{baseUrl}}/trips/68947dfcd2b0c929b2eae78c/expense
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "date": "2025-08-11",
+  "amount": 1000,
+  "name ":"Taxi Fare",
+}
+
+###create an itinerary
+POST {{baseUrl}}/itineraries/68947dfcd2b0c929b2eae78c
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "tripId": "687e106cc7d7b72a4b0e7e0b",
+  "title": "Day 1",
+  "description": "This is a description of the itinerary Day 1",
+  "date": "2025-07-31",
+  "activities": [
+    {
+      "name":"Check-in at hotel",
+      "time": "08:00",
+      "notes":["check In","Brakfast","Rest"]
+    },
+    {
+      "name":"visit Lake Side",
+      "time":"11:00 AM - 02:00 PM",
+      "notes":["visit Lake side","tal barahitemple","do boating","click pictures"]
+    },
+    {
+      "name":"visit street 9",
+      "time":"03:00 PM - 05:00 PM",
+      "notes":["have launch","hire a cab"]
+    }
+  
+    
+  ]
+  }
+
+### Invite a collaborator to a trip
+POST {{baseUrl}}/trips/6895c8cda1b22caa95fed154/invite
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "email": ["john.doe2@gmail.com","john.doe3@gmail.com"]
+}
+
+### Accept an invitation to a trip
+GET {{baseUrl}}/trips/6895c8cda1b22caa95fed154/invite/accept?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0cmlwSWQiOiI2ODk1YzhjZGExYjIyY2FhOTVmZWQxNTQiLCJpYXQiOjE3NTQ2NDk0MTAsImV4cCI6MTc1NDY1MzAxMH0.3FlwJKUHQYYGOlZaJ2qFO0Rx4ONwE-f_G5GHMGWX2tU
+Authorization: Bearer {{token}}
+Content-Type: application/json
