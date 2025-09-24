@@ -2,9 +2,10 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import routes from "./handlers/index.js";
-import { authMiddleware } from "./middlewares/authmiddleware.js";
+
 import { errorHandler } from "./middlewares/errorHandler.js";
 import cors from "cors";
+import { authMiddleware } from "./middlewares/authMiddleware.js";
 
 dotenv.config();
 
