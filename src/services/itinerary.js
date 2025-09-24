@@ -3,9 +3,9 @@ import Itinerary from "../models/itinerary.js";
 import Trip from "../models/trip.js";
 
 export const createItinerary = asyncHandler(async (req, res) => {
-  const { tripId, title, description, startDate, endDate } = req.body;
+  const {  title, description, activities, date } = req.body;
 
-  const trip = await Trip.findOne({ _id: tripId, user: req.user.userId }); //yaa jun user le trip create gariraxa tyo user ko trip ho ki haina vanera check gariraxa
+  const trip = await Trip.findOne({ _id: req.params.tripId, user: req.user.id, }); //yaa jun user le trip create gariraxa tyo user ko trip ho ki haina vanera check gariraxa
 
   if (!trip) {
     res.status(404);
@@ -18,7 +18,7 @@ export const createItinerary = asyncHandler(async (req, res) => {
   }
 
   const itinerary = await Itinerary.create({
-    trip: tripId,
+    trip: req.params.tripId,
     title,
     description,
     activities,
